@@ -26,6 +26,13 @@ int64_t Explore::limit(QueryContext* qctx) const {
       .getInt();
 }
 
+int64_t Explore::skip(QueryContext* qctx) const {
+  DCHECK(ExpressionUtils::isEvaluableExpr(skip_, qctx));
+  return DCHECK_NOTNULL(skip_)
+      ->eval(QueryExpressionContext(qctx ? qctx->ectx() : nullptr)())
+      .getInt();
+}
+
 std::unique_ptr<PlanNodeDescription> Explore::explain() const {
   auto desc = SingleInputNode::explain();
   addDescription("space", folly::to<std::string>(space_), desc.get());
