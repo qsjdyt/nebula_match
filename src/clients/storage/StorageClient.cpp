@@ -509,6 +509,7 @@ StorageRpcRespFuture<cpp2::LookupIndexResp> StorageClient::lookupIndex(
     req.indices_ref() = spec;
     req.common_ref() = common;
     req.limit_ref() = limit;
+    req.skip_ref() = skip;
     req.order_by_ref() = orderBy;
   }
 
